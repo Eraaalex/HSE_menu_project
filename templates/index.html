@@ -1,0 +1,33 @@
+{% extends "header.html" %}
+{% block title %} Main {% endblock %}
+{% block content %}
+    <div class="content">
+    <!--dish card-->
+        <div class="description">
+            <li>
+                <h3>first dish</h3>
+                <h4 class="dishes">
+                    {{ lunch.get_appetizer_name()}}
+                </h4>
+                <h3>second dish</h3>
+                <h4 class="dishes">
+                    {{ lunch.get_dish_name()}}
+                </h4>
+                <h3>a drink</h3>
+                <h4 class="dishes">
+                    {{ lunch.get_drink_name()}}
+                </h4>
+            </li>
+
+        </div>
+
+        <div class="photo">
+            <img src="" alt="PHOTO">
+        </div>
+
+    </div>
+
+    <div class="comments">
+
+    </div>
+{% endblock %}
