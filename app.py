@@ -1,12 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from models import *
-from flask import Flask, render_template, escape, abort, request
+from flask import Flask, render_template, escape, abort, request, flash
 from service import *
 from basic_input import *
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'secret'
 @app.route('/')
 def index():
     day_of_week = datetime.now().weekday()
@@ -18,6 +19,26 @@ def index():
 def weekPage():
     return render_template("week.html", lunches = db.session.query(Lunch).all(),
                            activeT = "", activeW = "active", style_name = "week")
+
+@app.route('/account', methods=['GET', 'POST'])
+def accountPage():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        login = request.form.get('login')
+        password = request.form.get('password')
+        print(name,login,password)
+        if (name !=None and  password!=None and login!=None ):
+            user = addUser(login = login, password = password,name = name, status = True)
+        elif (password!=None and login!=None):
+            user = db.session.query(Users).filter_by(login = login, password = password).scalar()
+            if user != None:
+                return render_template("userPage.html", user = user) # rewrite
+    return render_template("account.html")
+
+@app.route('/account/<name>')
+def product(name):
+    name=escape(name)
+    return render_template('userPage.html', user =db.session.query(Users).filter_by(name=name).one())
 
 # @app.route('/Main', method =['GET', 'POST'])
 # def main():
@@ -48,11 +69,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
-
+flag = False
 if __name__ == '__main__':
     with app.app_context():
-        # db.create_all()
-        # basic_input()
+        #db.create_all()
+        #basic_input()
         print("OK")
 
     app.run(debug=True)

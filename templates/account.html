@@ -1,0 +1,66 @@
+{% extends "header.html" %}
+{% block title %} Account {% endblock %}
+
+{% block content %}
+<div class="cheese">
+<div class="content_Acc">
+
+    <div class="container_btn">
+    <button type="button" name="button" class="btnAcc">Sign in</button>
+    <button type="button" name="button" class="btnAcc">Sign up</button>
+    </div>
+
+<div class="form_Acc" >
+
+      <form method="post" class="formAbout">
+
+       <input type="text" name="name" placeholder="имя" class="input inpAcc"> <br>
+       <br>
+       <input type="email" name="login" placeholder="почта"  class="input inpAcc" required><br>
+       <br>
+       <input type="text" name="password" placeholder="пароль"  class="input inpAcc" required><br>
+       <br>
+      <div class="container_for_button">
+       <input type="submit" class="btnAbout">
+       <input type="reset" class="btnAbout"></div>
+
+      </form>
+    </div>
+
+<div class="form_Acc">
+      <form method="post" class="formAbout invisible">
+       <input type="email" name="login" placeholder="логин"  class="input inpAcc" required><br>
+       <br>
+       <input type="text" name="password" placeholder="пароль"  class="input inpAcc" required><br>
+       <br>
+      <div class="container_for_button">
+       <input type="submit" class="btnAbout">
+       <input type="reset" class="btnAbout"></div>
+
+      </form>
+    </div>
+</div>
+    </div>
+<script>
+  let fInv=document.querySelectorAll('.formAbout');
+  let btn1=document.querySelectorAll('.btnAcc');
+
+  btn1[0].onclick= function(){
+  fInv[0].classList.add('invisible');
+
+  console.log('Hello');
+  fInv[1].classList.remove('invisible');
+
+  document.getElementsByClassName('form_Acc')[0].style='padding-top: 100px !important!';
+  }
+  btn1[1].onclick= function(){
+  fInv[0].classList.remove('invisible');
+  fInv[1].classList.add('invisible');
+
+document.getElementsByClassName('form_Acc')[0].style='padding-top: 100px !important!';
+  }
+
+</script>
+
+
+{% endblock %}

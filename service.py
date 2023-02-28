@@ -5,7 +5,7 @@ def addUser(login ="admin@admin.ru", password = "qwerty1",name = "Admin", status
 
     db.session.add(user)
     db.session.commit()
-    return None
+    return user
 
 def addAppetizer(name = "Appetizer_1", photo = "img.img"):
     appetizer = Appetizer(name = name, photo = photo)
@@ -16,7 +16,7 @@ def addAppetizer(name = "Appetizer_1", photo = "img.img"):
 def addDish(name = "Appetizer_1", photo = "img.img"):
     dish = Dish(name = name, photo = photo)
     db.session.add(dish)
-    #db.session.commit()
+    db.session.commit()
     return dish
 
 def addDrink(name = "Appetizer_1", photo = "img.img"):
@@ -30,15 +30,15 @@ def addLunch(appetizer_id:Appetizer, dish_id: Dish, drink_id:Drink, likes_amount
     db.session.add(lunch)
     db.session.commit()
     return lunch
-def addAccount(login ="admin@yandex.ru", password = "qwerty1", name = "eraaalex", status = True):
-    acc = Account(login = login, password = password, name = name, status = status)
-    db.session.add(acc)
-    db.session.commit()
-    return acc
-def addFeedback(user_id:Users, text):
-    feedback = Feedback(user_id = user_id,text = text)
-    db.session.add(feedback)
-    db.session.commit()
-    return feedback
+# def addAccount(login ="admin@yandex.ru", password = "qwerty1", name = "eraaalex", status = True):
+#     acc = Account(login = login, password = password, name = name, status = status)
+#     db.session.add(acc)
+#     db.session.commit()
+#     return acc
+# def addFeedback(user_id:Users, text):
+#     feedback = Feedback(user_id = user_id,text = text)
+#     db.session.add(feedback)
+#     db.session.commit()
+#     return feedback
 
 
