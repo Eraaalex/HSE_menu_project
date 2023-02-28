@@ -9,6 +9,7 @@ pip install Flask-Migrate
 ```
 
 ### PostgreSQL
+
 * [install PostgreSQl](https://www.postgresql.org/download/)
 * [install pgAdmin](https://www.pgadmin.org/download/pgadmin-4-windows/) - эта штука нужна, чтобы смотреть, что бд есть и запускать ее (с последним не факт). Есть альтернативы не такие навороченные, но я разобралась только в этой штуке.
 
