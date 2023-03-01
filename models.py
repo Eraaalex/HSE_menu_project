@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from flask_login import UserMixin
 db = SQLAlchemy()
-class Users(db.Model):
+class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
     login = db.Column(db.String(80), nullable = False)
     password = db.Column(db.String(50), nullable = False)
