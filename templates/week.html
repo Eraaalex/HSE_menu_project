@@ -1,9 +1,9 @@
 {% extends "header.html" %}
 {% block title %} Week {% endblock %}
 {% block content %}
-<div class="content">
+<div class="content_week">
     <div class="container">
-        <div class="grid">
+        <div class="grid" style="overflow-y:scroll;">
             {% for lunch in lunches %}
             <div class="card_container">
                 <div class="menu_card">
@@ -12,8 +12,6 @@
                         <li class="dishes">{{ lunch.get_appetizer_name() }}</li>
                         <h5 class="headers">second course</h5>
                         <li class="dishes">{{lunch.get_dish_name()}}</li>
-                        <li class="dishes">dish</li>
-                        <li class="dishes">dish</li>
                         <h5 class="headers">drink</h5>
                         <li class="dishes">{{lunch.get_drink_name()}}</li>
                     </ul>

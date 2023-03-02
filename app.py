@@ -37,9 +37,7 @@ def registerPage():
             return redirect(url_for('accountPage', name = user.name), code =301)
         elif (password!=None and login!=None):
             user = db.session.query(Users).filter_by(login = login, password = password).first()
-
             if user != None:
-                print("OK")
                 login_user(user, remember=True)
                 return redirect(url_for('accountPage', name = user.name),  code=301)
     return render_template("account.html")
@@ -73,16 +71,16 @@ def logout():
           category='success')
     return redirect(url_for('index'))
 
-@app.route('/basket')
+@app.route('/cart')
 @login_required
-def basket():
-    return render_template('basket.html', user = current_user)
+def cart():
+    return render_template('cart.html', user = current_user)
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('error404.html')
 @app.errorhandler(500)
 def page_not_found():
-    return render_template('error404.html'), 500
+    return render_template('error404.html')
 @app.errorhandler(401)
 def page_not_found():
     return render_template('error404.html')
