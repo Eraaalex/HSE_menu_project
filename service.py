@@ -1,10 +1,12 @@
 from models import *
 
 def addUser(login ="admin@admin.ru", password = "qwerty1",name = "Admin", status = True):
-    user = Users(id = None, login = login, password = password, name = name, status = status)
+    user = None
+    if (db.session.query(Users).filter_by(login = login).scalar() is None):
+        user = Users(id = None, login = login, password = password, name = name, status = status)
 
-    db.session.add(user)
-    db.session.commit()
+        db.session.add(user)
+        db.session.commit()
     return user
 
 def addAppetizer(name = "Appetizer_1", photo = "img.img"):

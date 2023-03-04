@@ -7,8 +7,36 @@ from service import *
 from basic_input import *
 from datetime import datetime
 
+
+DBUSER = 'postgres'
+DBPASS = 'eralex'
+DBHOST = 'localhost'
+DBPORT = '5432'
+DBNAME = 'project_db'
+
 app = Flask(__name__)
 app.secret_key = 'secret'
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
+        user=DBUSER,
+        passwd=DBPASS,
+        host=DBHOST,
+        port=DBPORT,
+        db=DBNAME)
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project_db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+login_manager = LoginManager(app)
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+login_manager.login_message = u'Please log in to access this page.'
+login_manager.login_message_category = 'error'
+migrate = Migrate(app, db)
 @app.route('/')
 def index():
     day_of_week = datetime.now().weekday()
@@ -29,7 +57,7 @@ def weekPage():
 
 @app.route('/cart_empty')
 def cart_empty():
-    return render_template(".html", lunches = db.session.query(Lunch).all(),
+    return render_template("cart_empty.html", lunches = db.session.query(Lunch).all(),
                            activeT = "active", activeW = "active", style_name = "week")
 
 @app.route('/account', methods=['GET', 'POST'])
@@ -59,12 +87,7 @@ def accountPage(name):
     if (user is None):
         return render_template("error404.html")
     return render_template('userPage.html', user = user)
-login_manager = LoginManager(app)
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-login_manager.login_message = u'Please log in to access this page.'
-login_manager.login_message_category = 'error'
-migrate = Migrate(app, db)
+
 @login_manager.user_loader
 def load_user(userid):
     return getUser(userid)
@@ -94,16 +117,12 @@ def page_not_found():
 def page_not_found():
     return render_template('error404.html')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project_db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db.init_app(app)
 
-flag = False
 if __name__ == '__main__':
     with app.app_context():
-        # db.create_all()
-        # basic_input()
+        db.create_all()
+        basic_input()
         print("OK")
 
     app.run(debug=True)
