@@ -10,7 +10,7 @@ from datetime import datetime
 
 DBUSER = 'postgres'
 DBPASS = 'eralex'
-DBHOST = 'localhost'
+DBHOST = 'postgres'
 DBPORT = '5432'
 DBNAME = 'project_db'
 
