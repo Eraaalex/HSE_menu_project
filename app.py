@@ -15,14 +15,22 @@ def index():
     lunch = db.session.query(Lunch).filter_by(id = day_of_week + 1).scalar()
     if (lunch is None):
         return render_template('eror404.html')
+
+    print("!!!!!!")
+    addit = "/cart" if (current_user is None) else "/cart_empty"
     return render_template("index.html",lunch = lunch,
-                          activeT = "active", activeW = "", style_name ="index")
+                          activeT = "active", activeW = "", addition = addit)
 
 @app.route('/week')
 @login_required
 def weekPage():
     return render_template("week.html", lunches = db.session.query(Lunch).all(),
                            activeT = "", activeW = "active", style_name = "week")
+
+@app.route('/cart_empty')
+def cart_empty():
+    return render_template(".html", lunches = db.session.query(Lunch).all(),
+                           activeT = "active", activeW = "active", style_name = "week")
 
 @app.route('/account', methods=['GET', 'POST'])
 def registerPage():
@@ -31,7 +39,7 @@ def registerPage():
         login = request.form.get('login')
         password = request.form.get('password')
 
-        if (name !=None and  password!=None and login!=None ):
+        if (name !=None and password!=None and login!=None ):
             user = addUser(login = login, password = password,name = name, status = True)
             login_user(user, remember=True)
             return redirect(url_for('accountPage', name = user.name), code =301)
@@ -40,6 +48,7 @@ def registerPage():
             if user != None:
                 login_user(user, remember=True)
                 return redirect(url_for('accountPage', name = user.name),  code=301)
+        flash('Wrong login or password', 'danger')
     return render_template("account.html")
 
 @app.route('/account/<name>')
@@ -67,7 +76,7 @@ def unauthorized():
 @login_required
 def logout():
     logout_user()
-    flash(message=u'You have logged out. Hope to see you soon!',
+    flash(message='You have logged out. Hope to see you soon!',
           category='success')
     return redirect(url_for('index'))
 

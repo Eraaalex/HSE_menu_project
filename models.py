@@ -5,7 +5,7 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    login = db.Column(db.String(80), nullable = False)
+    login = db.Column(db.String(80), nullable = False, unique=True)
     password = db.Column(db.String(50), nullable = False)
     name = db.Column(db.String(50), nullable = False)
     status = db.Column(db.Boolean, nullable = False)
@@ -13,6 +13,13 @@ class Users(UserMixin, db.Model):
 
     def __repr__(self):
         return f'{self.id} {self.name}'
+
+    @staticmethod
+    def get_user_by_email(email):
+        return db.session().query(Users).filter_by(login = email).scalar()
+    @staticmethod
+    def get_user_by_id(id):
+        return db.session().query(Users).filter_by(id = id).scalar()
 
 # class Feedback(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
