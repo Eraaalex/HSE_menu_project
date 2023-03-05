@@ -21,14 +21,6 @@ class Users(UserMixin, db.Model):
     def get_user_by_id(id):
         return db.session().query(Users).filter_by(id = id).scalar()
 
-# class Feedback(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-#     users = db.relationship('Users', backref = db.backref('feedback', lazy=False))
-#     text = db.Column(db.String)
-#
-# #     def __repr__(self):
-# #         return f'{self.id}'
 
 
 class Lunch(db.Model):
@@ -62,12 +54,9 @@ class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
     photo = db.Column(db.String)
-# class Account (db.Model):
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     login = db.Column(db.String(80), primary_key=True, nullable=False)
-#     password = db.Column(db.String(50), nullable=False)
-#     name = db.Column(db.String(50), nullable=False)
-#     status = db.Column(db.Boolean, nullable=False)
-
-
-
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('Users', backref=db.backref('order', lazy=False))
+    lunch_id = db.Column(db.Integer, db.ForeignKey('lunch.id'))
+    lunch = db.relationship('Lunch', backref=db.backref('order', lazy=False))

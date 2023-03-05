@@ -10,23 +10,23 @@ from datetime import datetime
 
 DBUSER = 'postgres'
 DBPASS = 'eralex'
-DBHOST = '5432'
+DBHOST = 'localhost'
 DBPORT = '5432'
-DBNAME = 'project_db'
+DBNAME = 'project'
 
 app = Flask(__name__)
 app.secret_key = 'secret'
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
-app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
-        user=DBUSER,
-        passwd=DBPASS,
-        host=DBHOST,
-        port=DBPORT,
-        db=DBNAME)
+# # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
+# app.config['SQLALCHEMY_DATABASE_URI'] = \
+#     'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
+#         user=DBUSER,
+#         passwd=DBPASS,
+#         host=DBHOST,
+#         port=DBPORT,
+#         db=DBNAME)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -37,28 +37,57 @@ login_manager.login_view = 'login'
 login_manager.login_message = u'Please log in to access this page.'
 login_manager.login_message_category = 'error'
 migrate = Migrate(app, db)
-@app.route('/')
+
+local_cart=[]
+
+
+@app.route('/',methods=['GET', 'POST'])
 def index():
     day_of_week = datetime.now().weekday()
-    lunch = db.session.query(Lunch).filter_by(id = day_of_week + 1).scalar()
-    if (lunch is None):
+    lunches = []
+    lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 1).scalar())
+    lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 2).scalar())
+    lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 3).scalar())
+    if (lunches is None or lunches == []):
         return render_template('eror404.html')
+    print("!!!!!!!!!!!!!!!!!!")
 
-    print("!!!!!!")
-    addit = "/cart" if (current_user is None) else "/cart_empty"
-    return render_template("index.html",lunch = lunch,
+
+
+    addit = "/cart" if (current_user.get_id() is not None) else "/cart_empty"
+    if request.method == 'POST':
+        id = int(request.form['lunch_id'])
+        qty = int(request.form['qty'])
+
+        if current_user.get_id() is None:
+            flash(message="You aren't logg", category="warning")
+            return redirect(url_for("index"))
+        global local_cart
+
+
+        matching = [d for d in local_cart if d['lunch_id'] == id]
+        if matching:
+            matching[0]['qty'] += qty
+        else:
+            local_cart.append(dict({'lunch_id': id, 'qty': qty, 'lunch' : db.session.query(Lunch).filter_by(id = id).scalar()}))
+
+
+
+    return render_template("index.html",lunches = lunches,
                           activeT = "active", activeW = "", addition = addit)
 
 @app.route('/week')
 @login_required
 def weekPage():
+
     return render_template("week.html", lunches = db.session.query(Lunch).all(),
-                           activeT = "", activeW = "active", style_name = "week")
+                           activeT = "", activeW = "active", style_name = "week", addition = "/cart")
 
 @app.route('/cart_empty')
 def cart_empty():
+
     return render_template("cart_empty.html", lunches = db.session.query(Lunch).all(),
-                           activeT = "active", activeW = "active", style_name = "week")
+                           activeT = "active", activeW = "active", style_name = "week", addition = '/cart_empty')
 
 @app.route('/account', methods=['GET', 'POST'])
 def registerPage():
@@ -70,14 +99,16 @@ def registerPage():
         if (name !=None and password!=None and login!=None ):
             user = addUser(login = login, password = password,name = name, status = True)
             login_user(user, remember=True)
-            return redirect(url_for('accountPage', name = user.name), code =301)
+            return redirect(url_for('accountPage', name = user.name), code = 301)
         elif (password!=None and login!=None):
             user = db.session.query(Users).filter_by(login = login, password = password).first()
             if user != None:
                 login_user(user, remember=True)
-                return redirect(url_for('accountPage', name = user.name),  code=301)
+                return redirect(url_for('accountPage', name = user.name),  code= 301)
         flash('Wrong login or password', 'danger')
-    return render_template("account.html")
+
+    addit = "/cart" if (current_user.get_id() is not None) else "/cart_empty"
+    return render_template("account.html", addition = addit)
 
 @app.route('/account/<name>')
 @login_required
@@ -99,6 +130,8 @@ def unauthorized():
 @login_required
 def logout():
     logout_user()
+    global local_cart
+    local_cart = []
     flash(message='You have logged out. Hope to see you soon!',
           category='success')
     return redirect(url_for('index'))
@@ -106,7 +139,34 @@ def logout():
 @app.route('/cart')
 @login_required
 def cart():
-    return render_template('cart.html', user = current_user)
+    return render_template('cart.html', user = current_user, cart = local_cart)
+
+# @app.route('/add-to-cart', methods=['GET', 'POST'])
+# def add_to_cart():
+#     if request.method == 'POST':
+#         # приводим оба параметра к числу что бы сессия не материлась
+#         id = int(request.form['lunch_id'])
+#         qty = int(request.form['qty'])
+#         print("===========")
+#         print(id, qty)
+#         print()
+#         if current_user is None:
+#             flash(message="You aren't logg", category="danger")
+#             return redirect(url_for("index"))
+#         global local_cart
+#
+#         # проверяем совпадения id product_id и если оно есть, то прибавляем количество qty к уже существующему
+#         matching = [d for d in local_cart if d['lunch_id'] == id]
+#         if matching:
+#             matching[0]['qty'] += qty
+#
+#         local_cart.append(dict({'lunch_id': id, 'qty': qty})) # добавляем товар к сессии в виде словаря
+#
+#         return redirect(url_for('index'))
+
+
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('error404.html')
@@ -121,8 +181,8 @@ def page_not_found():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
-        basic_input()
+        # db.create_all()
+        # basic_input()
         print("OK")
 
     app.run(debug=True)
