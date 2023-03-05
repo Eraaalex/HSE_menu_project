@@ -26,7 +26,7 @@ app.secret_key = 'secret'
 #         port=DBPORT,
 #         db=DBNAME)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -50,7 +50,6 @@ def index():
     lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 3).scalar())
     if (lunches is None or lunches == []):
         return render_template('eror404.html')
-    print("!!!!!!!!!!!!!!!!!!")
 
 
 
