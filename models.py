@@ -54,9 +54,11 @@ class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
     photo = db.Column(db.String)
-class Order(db.Model):
+class Orders(db.Model):
+    __tablename__ ='orders'
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('Users', backref=db.backref('order', lazy=False))
     lunch_id = db.Column(db.Integer, db.ForeignKey('lunch.id'))
-    lunch = db.relationship('Lunch', backref=db.backref('order', lazy=False))
+
+    lunch = db.relationship('Lunch', backref=db.backref('orders', lazy=False))
+    user = db.relationship('Users', backref=db.backref('orders', lazy=False))

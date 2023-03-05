@@ -17,6 +17,11 @@
             </ul>
         </div>
         {% endfor %}
+            <form action="/cart" method="POST">
+                    <input class = "invisible" type="hidden" name="add_to_cart">
+                    <input class = "invisible" type="hidden" name="cart" value="nothing">
+                    <input type="submit" class="select" value="ORDER" >
+            </form>
 
 </div>
 

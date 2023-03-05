@@ -50,9 +50,6 @@ def index():
     lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 3).scalar())
     if (lunches is None or lunches == []):
         return render_template('eror404.html')
-
-
-
     addit = "/cart" if (current_user.get_id() is not None) else "/cart_empty"
     if request.method == 'POST':
         id = int(request.form['lunch_id'])
@@ -60,7 +57,7 @@ def index():
 
         if current_user.get_id() is None:
             flash(message="You aren't logg", category="warning")
-            return redirect(url_for("index"))
+            return redirect(url_for("index", lunches = lunches, activeT = "active", activeW = "", addition = addit))
         global local_cart
 
 
@@ -135,35 +132,24 @@ def logout():
           category='success')
     return redirect(url_for('index'))
 
-@app.route('/cart')
+@app.route('/cart', methods=['GET', 'POST'])
 @login_required
 def cart():
+    global local_cart
+    if request.method == 'POST':
+        # cart = (request.form['cart'])
+        print("0000")
+        print("8888")
+        user = db.session.query(Users).filter_by(id = current_user.get_id()).first()
+        print("!"*3)
+        print("999")
+        print(user.name)
+        for el in local_cart:
+            addOrder(user.id, el['lunch'].id)
+
+        local_cart = []
+
     return render_template('cart.html', user = current_user, cart = local_cart)
-
-# @app.route('/add-to-cart', methods=['GET', 'POST'])
-# def add_to_cart():
-#     if request.method == 'POST':
-#         # приводим оба параметра к числу что бы сессия не материлась
-#         id = int(request.form['lunch_id'])
-#         qty = int(request.form['qty'])
-#         print("===========")
-#         print(id, qty)
-#         print()
-#         if current_user is None:
-#             flash(message="You aren't logg", category="danger")
-#             return redirect(url_for("index"))
-#         global local_cart
-#
-#         # проверяем совпадения id product_id и если оно есть, то прибавляем количество qty к уже существующему
-#         matching = [d for d in local_cart if d['lunch_id'] == id]
-#         if matching:
-#             matching[0]['qty'] += qty
-#
-#         local_cart.append(dict({'lunch_id': id, 'qty': qty})) # добавляем товар к сессии в виде словаря
-#
-#         return redirect(url_for('index'))
-
-
 
 
 @app.errorhandler(404)

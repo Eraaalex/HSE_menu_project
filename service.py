@@ -1,12 +1,13 @@
 from models import *
 
 def addUser(login ="admin@admin.ru", password = "qwerty1",name = "Admin", status = True):
-    user = None
-    if (db.session.query(Users).filter_by(login = login).scalar() is None):
-        user = Users(id = None, login = login, password = password, name = name, status = status)
+    user = db.session.query(Users).filter_by(login = login).scalar()
+    if (user is None):
+        user = Users(id = None,login = login, password = password, name = name, status = status)
 
         db.session.add(user)
         db.session.commit()
+
     return user
 
 def addAppetizer(name = "Appetizer_1", photo = "img.img"):
@@ -32,6 +33,12 @@ def addLunch(appetizer_id:Appetizer, dish_id: Dish, drink_id:Drink, likes_amount
     db.session.add(lunch)
     db.session.commit()
     return lunch
+
+def addOrder(user_id :Users, lunch_id:Lunch):
+    order = Orders(user_id = user_id, lunch_id = lunch_id)
+    db.session.add(order)
+    db.session.commit()
+    return order
 
 def getUser(user_id):
     return db.session.query(Users).filter_by(id = user_id).first()

@@ -35,9 +35,10 @@ def basic_input():
     drks = db.session.query(Drink).all()
 
     for i in range(6):
-        addLunch(apps[i].id, dshs[i].id, drks[i].id)
+        lun = addLunch(apps[i].id, dshs[i].id, drks[i].id)
 
-    addUser()
+    user = addUser()
+    addOrder(user.id, lun.id)
 
 
 
