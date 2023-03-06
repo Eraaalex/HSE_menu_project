@@ -20,9 +20,9 @@
             <ul>
                 <li class="static">MENU</li>
                 <li><a href="/" class ={{activeT}}>TODAY</a></li>
-                <li><a href="/week" class={{activeW}} >WEEK</a></li>
-                <li><a href={{addition}} class="icons"><img src="../img/cart_icon.png"/></a></li>
-                <li><a href="/account" class="icons"><img src="../img/user_icon.png"/></a></li>
+                <li><a href="/week" class={{activeW}} >WEEK</a></li><!-- "="../img/cart_icon.png" -->
+                <li><a href={{addition}} class="icons"><img src="{{ url_for('static', filename='../static/img/cart_icon.png') }}" style = "height: 10px"/></a></li>
+                <li><a href="/account" class="icons"><img src="{{ url_for('static', filename='../static/img/user_icon.png') }}" style = "height: 10px"/></a></li>
 
             </ul>
         </header>
