@@ -1,3 +1,5 @@
+import random
+
 from service import *
 def basic_input():
     f = '''Салат из капусты с кукурузой и ветчиной
@@ -35,9 +37,9 @@ def basic_input():
     drks = db.session.query(Drink).all()
 
     for i in range(6):
-        lun = addLunch(apps[i].id, dshs[i].id, drks[i].id)
+        lun = addLunch(apps[i].id, dshs[i].id, drks[i].id, random.randint(1, 100))
 
-    user = addUser()
+    user = addUser(status = False)
     addOrder(user.id, lun.id)
 
 

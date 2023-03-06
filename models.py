@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import UserMixin
+from datetime import datetime
 db = SQLAlchemy()
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
@@ -9,7 +10,6 @@ class Users(UserMixin, db.Model):
     password = db.Column(db.String(50), nullable = False)
     name = db.Column(db.String(50), nullable = False)
     status = db.Column(db.Boolean, nullable = False)
-
 
     def __repr__(self):
         return f'{self.id} {self.name}'
@@ -59,6 +59,10 @@ class Orders(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     lunch_id = db.Column(db.Integer, db.ForeignKey('lunch.id'))
-
+    date= db.Column(db.DateTime, nullable=False,default=datetime.utcnow())
     lunch = db.relationship('Lunch', backref=db.backref('orders', lazy=False))
     user = db.relationship('Users', backref=db.backref('orders', lazy=False))
+    def get_user_name_by_id(self):
+        return db.session().query(Users).filter_by(id = self.user_id).first().name
+    def get_lunch_by_id(self):
+        return db.session().query(Lunch).filter_by(id = self.lunch_id).first()

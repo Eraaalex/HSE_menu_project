@@ -4,25 +4,23 @@
 </style>
 <html>
 
-<head>
-    <title>Menu HSE</title>
-    <meta charset ="UTF-8">
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
-    </script>
-    <title>{% block title %} {% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='../static/style.css') }}">
-</head>
+    <head>
+        <title>Menu HSE</title>
+        <meta charset ="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+        </script>
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/style.css') }}">
+    </head>
     <body>
         <header class="menu">
             <ul>
                 <li class="static">MENU</li>
                 <li><a href="/" class ={{activeT}}>TODAY</a></li>
-                <li><a href="/week" class={{activeW}} >WEEK</a></li><!-- "="../img/cart_icon.png" -->
-                <li><a href={{addition}} class="icons"><img src="{{ url_for('static', filename='../static/img/cart_icon.png') }}" style = "height: 10px"/></a></li>
-                <li><a href="/account" class="icons"><img src="{{ url_for('static', filename='../static/img/user_icon.png') }}" style = "height: 10px"/></a></li>
+                <li><a href="/week" class={{activeW}} >WEEK</a></li>
+                <li><a href="{{addition}}" class="icons"><img src="{{ url_for('static', filename='../static/img/cart_icon.png') }}" style = "height: 15px"/></a></li>
+                <li><a href="/account{{registered}}" class="icons"><img src="{{ url_for('static', filename='../static/img/user_icon.png') }}" style = "height: 15px"/></a></li>
 
             </ul>
         </header>

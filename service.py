@@ -35,7 +35,7 @@ def addLunch(appetizer_id:Appetizer, dish_id: Dish, drink_id:Drink, likes_amount
     return lunch
 
 def addOrder(user_id :Users, lunch_id:Lunch):
-    order = Orders(user_id = user_id, lunch_id = lunch_id)
+    order = Orders(user_id = user_id, lunch_id = lunch_id, date = datetime.now())
     db.session.add(order)
     db.session.commit()
     return order

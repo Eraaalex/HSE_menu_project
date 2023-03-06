@@ -443,10 +443,8 @@ margin-top : 100px;
 .alert-link{font-weight:700}
 .alert-dismissible{padding-right:3rem}
 .alert-dismissible .btn-close{position:absolute;top:0;right:0;z-index:2;padding:1.25rem 1rem}
-.alert-primary{color:#084298;background-color:#cfe2ff;border-color:#b6d4fe}
-.alert-primary .alert-link{color:#06357a}
-.alert-secondary{color:#41464b;background-color:#e2e3e5;border-color:#d3d6d8}
-.alert-secondary .alert-link{color:#34383c}
+/*.alert-primary{color:#084298;background-color:#cfe2ff;border-color:#b6d4fe}
+.alert-primary .alert-link{color:#06357a}*/
 .alert-success{color:#0f5132;background-color:#d1e7dd;border-color:#badbcc}
 .alert-success .alert-link{color:#0c4128}
 .alert-info{color:#055160;background-color:#cff4fc;border-color:#b6effb}
@@ -455,10 +453,6 @@ margin-top : 100px;
 .alert-warning .alert-link{color:#523e02}
 .alert-danger{color:#842029;background-color:#f8d7da;border-color:#f5c2c7}
 .alert-danger .alert-link{color:#6a1a21}
-.alert-light{color:#636464;background-color:#fefefe;border-color:#fdfdfe}
-.alert-light .alert-link{color:#4f5050}
-.alert-dark{color:#141619;background-color:#d3d3d4;border-color:#bcbebf}
-.alert-dark .alert-link{color:#101214}
 
 .fade{transition:opacity .15s linear}
 @media (prefers-reduced-motion:reduce){
@@ -472,4 +466,60 @@ fade.show {
 .error {
     background: #F0EDE3;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.chart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  min-width: 800px;
+  margin: 0 auto;
+}
+
+.chart__title {
+  width: 100%;
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+.chart__data {
+height: 250px;
+}
+
+.chart__input-group {
+  display: flex;
+  align-items: center;
+}
+
+.chart__input-group:last-of-type {
+}
+
+
+.input-field {
+  font-size: inherit;
+  color: inherit;
+  text-align: center;
+
+  white-space: normal;
+  border: 1px solid #8e8d8a;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.chart__submit-button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+
+.chart__canvas-wrapper {
+height: 250px;
+  border: 1px solid #8e8d8a;
+  border-radius: 5px;
 }
