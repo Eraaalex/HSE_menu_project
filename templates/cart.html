@@ -2,14 +2,13 @@
 {% block title %} Cart {% endblock %}
 {% block content %}
 
-<div class="content_cart" style="margin: 100px">
+<div class="content_cart">
       <p>User information: {{user.name}} {{user.login}}</p>
 
         {% for el in cart %}
-        <p>Lunch</p>
         <div>
             <p>Amount in cart: {{ el['qty'] }}</p>
-            <ul>
+            <ul class="cart_item">
                 <li>{{ el['lunch'].get_appetizer_name()}} </li>
                 <li>{{ el['lunch'].get_dish_name()}} </li>
                 <li>{{ el['lunch'].get_drink_name()}}</li>

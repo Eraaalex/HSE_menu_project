@@ -13,13 +13,14 @@
                     {% endif %}
               {% endfor %}
             {% endif %}
-{% endwith %}
+        {% endwith %}
 
-        <div class="holder">
+        <div class="holder" style="overflow-y:scroll">
             {% for lunch in lunches %}
 
             <div class="description">
                 <li>
+                    <h5 class="day_of_week_main">MONDAY</h5>
                     <h3>first dish</h3>
                     <h4 class="dishes">
                         {{ lunch.get_appetizer_name()}}
@@ -32,6 +33,7 @@
                     <h4 class="dishes">
                         {{ lunch.get_drink_name()}}
                     </h4>
+                    <h5 class="type_main">business lunch</h5>
                 </li>
                 
             </div>
@@ -47,13 +49,11 @@
             </form>
             {% endfor %}
         </div>
-<!--        <div class="photo">-->
-<!--            <img src="" alt="PHOTO">-->
-<!--        </div>-->
 
         <div>
             <a href="/logout">LogOut</a>
         </div>
+        
     </div>
 
 
