@@ -27,8 +27,8 @@ def addDrink(name = "Appetizer_1", photo = "img.img"):
     db.session.add(drink)
     db.session.commit()
     return drink
-def addLunch(appetizer_id:Appetizer, dish_id: Dish, drink_id:Drink, likes_amount = 0, dislikes_amount =0):
-    lunch = Lunch(appetizer_id = appetizer_id, dish_id = dish_id, drink_id = drink_id,
+def addLunch(name,appetizer_id:Appetizer, dish_id: Dish, drink_id:Drink, likes_amount = 0, dislikes_amount =0):
+    lunch = Lunch(name = name, appetizer_id = appetizer_id, dish_id = dish_id, drink_id = drink_id,
                   likes_amount =likes_amount, dislikes_amount = dislikes_amount)
     db.session.add(lunch)
     db.session.commit()

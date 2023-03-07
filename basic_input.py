@@ -8,6 +8,30 @@ def basic_input():
     Салат Винегрет
     Салат из капусты с морковкой
     Салат по-деревенски 
+    Салат из капусты с кукурузой и ветчиной_2
+    Салат домашний с майонезом_2
+    Салат по-деревенски_2
+    Салат Винегрет_2
+    Салат из капусты с морковкой_2
+    Салат по-деревенски_2
+    Салат из капусты с кукурузой и ветчиной_3
+    Салат домашний с майонезом_3
+    Салат по-деревенски_3
+    Салат Винегрет_3
+    Салат из капусты с морковкой_3
+    Салат по-деревенски_3
+    Суп картофельный с курицей
+    Лапша куриная
+    Крем-суп из тыквы
+    Крем-суп овощной
+    Рассольник с говядиной
+    Борщ с курицей
+    Суп картофельный с курицей
+    Лапша куриная
+    Крем-суп из тыквы
+    Крем-суп овощной
+    Рассольник с говядиной
+    Борщ с курицей
     Суп картофельный с курицей
     Лапша куриная
     Крем-суп из тыквы
@@ -19,28 +43,44 @@ def basic_input():
     Напиток ягодный
     Напиток каркаде
     Компот из яблок
+    Напиток
+    Компот из сухофруктов
     Напиток из шиповника
+    Напиток ягодный
+    Напиток каркаде
+    Компот из яблок
+    Напиток
+    Компот из сухофруктов
+    Напиток из шиповника
+    Напиток ягодный
+    Напиток каркаде
+    Компот из яблок
+    Напиток
     '''.split("\n")
+    apps =[]
+    dshs =[]
+    drks =[]
+    for i in range(18):
+        apps.append(addAppetizer(name = f[i]))
 
+    for i in range(18, 36):
+        dshs.append(addDish(name = f[i]))
+    for i in range(36, 36+18):
+        drks.append(addDrink(name = f[i]))
 
-    for i in range(6):
-        addAppetizer(name = f[i])
-
-    for i in range(6, 12):
-        addDish(name = f[i])
-    for i in range(12, 18):
-        addDrink(name = f[i])
-
-
-    apps = db.session.query(Appetizer).all()
-    dshs = db.session.query(Dish).all()
-    drks = db.session.query(Drink).all()
-
-    for i in range(6):
-        lun = addLunch(apps[i].id, dshs[i].id, drks[i].id, random.randint(1, 100))
+    types = ["bsns", "veg", "std"]
+    day_of_week =["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    for i in range(18):
+        lun = addLunch(name = types[i%3] + " "+day_of_week[i//3],appetizer_id=apps[i].id,
+                       dish_id=dshs[i].id,drink_id= drks[i].id,
+                       likes_amount= random.randint(1, 100), dislikes_amount=random.randint(1,100))
 
     user = addUser(status = False)
     addOrder(user.id, lun.id)
+
+# from app import app
+# with app.app_context():
+#     basic_input()
 
 
 

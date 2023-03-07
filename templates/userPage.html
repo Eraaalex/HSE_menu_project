@@ -9,7 +9,7 @@
 
 
 
-    <table>
+    <table class ="{{student}}">
         <tr>
             <th>User Name</th>
             <th></th>
@@ -31,33 +31,64 @@
     </div>
 
     <section class="chart">
-      <h1 class="chart__title">By likes: </h1>
+      <h1 class="chart__title {{student}}">By likes: </h1>
 
       <form class="chart__data" action="#" method="POST">
         {% for lunch in lunches %}
            <div class="chart__input-group invisible">
-          <label class="chart__label invisible" for="{{lunch.id}}">{{ lunch.id}} </label>
-          <input class="chart__input input-field invisible" type="number" name="{{lunch.id}}" id="{{lunch.id}}" min="0" max="100"
+          <label class="chart__label invisible" for="{{lunch.name}}">{{lunch.name}} </label>
+          <input class="chart__input input-field invisible" type="number" name="{{lunch.name}}" id="{{lunch.name}}" min="0" max="100"
                  required value = {{lunch.likes_amount}}>
             </div>
           {% endfor %}
-        <input class="chart__submit-button input-field" type="submit" value="Show">
+        <input class="chart__submit-button input-field {{student}}" type="submit" value="Show">
       </form>
 
       <div class="chart__canvas-wrapper invisible">
-        <canvas id="canvas" width="600px" height="250px">Браузер не поддерживает Canvas</canvas>
+        <canvas id="canvas" width="830px" height="250px">Браузер не поддерживает Canvas</canvas>
       </div>
     </section>
+    <section>
+        <h1 class="chart__title {{student}}">By orders: </h1>
+  <form class="chart__data_2" action="#" method="POST">
+        {% for i in range(18) %}
+           <div class="chart__input-group invisible">
+          <label class="chart__label invisible" for="{{lunches[i].id}}"></label>
+          <input class="chart__input__2 input-field invisible" type="number" name="{{lunches[i].name}}" id="{{lunches[i].id}}" min="0" max="100"
+                 required value = {{orders_all[i]}}>
+            </div>
+          {% endfor %}
+        <input class="chart__submit-button input-field {{student}}" type="submit" style="width:90px" value="Show">
+      </form>
+
+      <div class="chart__canvas-wrapper invisible">
+        <canvas id="canvas_2" width="830px" height="250px">Браузер не поддерживает Canvas</canvas>
+      </div>
+    </section>
+
+
 
     <script>
 
         const MAX_PERCENTAGE = 100;
         const formElement = document.querySelector(`.chart__data`);
         const inputElements = formElement.querySelectorAll(`.chart__input`);
+        const canvas = document.querySelector(`#canvas`);
+        const canvas_2 = document.querySelector(`#canvas_2`);
+        const formElement_2 = document.querySelector(`.chart__data_2`);
+        const inputElements_2 = formElement_2.querySelectorAll(`.chart__input__2`);
+        const ctx = canvas.getContext(`2d`);
+        const ctx_2 = canvas_2.getContext(`2d`);
+        var el = document.querySelectorAll('.chart__canvas-wrapper');
+        console.log(formElement_2);
+        console.log(canvas_2);
+        console.log(inputElements_2);
+
+
         const COLORS = [
-          `#b3d5fc`,
           `#8E8D8A`,
-          `#e98074`
+          `#e98074`,
+          `#E85A4F`
         ];
 
         const BarSize = {
@@ -67,21 +98,21 @@
 
         const BarCoordinate = {
           INITIAL_X: 40,
-          INITIAL_Y: 200
+          INITIAL_Y: 220
         }
 
         const Font = {
-          SIZE: `16px`,
+          SIZE: `14px`,
           FAMILY: `Tahoma`
         };
 
         const LabelCoordinate = {
           INITIAL_X: 10,
-          INITIAL_Y: 50
+          INITIAL_Y: 30
         }
 
         const Gap = {
-          HORIZONTAL: 20,
+          HORIZONTAL: 35,
           VERTICAL: 20
         }
 
@@ -93,9 +124,6 @@
           }));
         };
 
-
-        const canvas = document.querySelector(`#canvas`);
-        const ctx = canvas.getContext(`2d`);
 
         const renderChart = (items) => {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -112,7 +140,7 @@
             ctx.save();
             ctx.translate(0, canvas.height);
             ctx.rotate(-Math.PI/2);
-            ctx.fillText(item.name.toUpperCase(), LabelCoordinate.INITIAL_X, currentLabelY);
+            ctx.fillText(item.name, LabelCoordinate.INITIAL_X, currentLabelY);
             ctx.restore();
             ctx.fillRect(currentBarX, BarCoordinate.INITIAL_Y, BarSize.WIDTH, -barHeight);
 
@@ -120,13 +148,45 @@
             currentLabelY += gapBetweenBars;
           }
         };
-        var el = document.querySelector('.chart__canvas-wrapper');
+        const renderChart_2 = (items) => {
+          ctx_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
+
+          let currentLabelY = LabelCoordinate.INITIAL_Y;
+          let currentBarX = BarCoordinate.INITIAL_X;
+          const gapBetweenBars = BarSize.WIDTH + Gap.HORIZONTAL;
+
+          for (const item of items) {
+            const barHeight = (item.value * BarSize.MAX_HEIGHT) / MAX_PERCENTAGE;
+            console.log(barHeight);
+            ctx_2.fillStyle = item.color;
+            ctx_2.font = `${Font.SIZE} ${Font.FAMILY}`;
+            ctx_2.save();
+            ctx_2.translate(0, canvas.height);
+            ctx_2.rotate(-Math.PI/2);
+            ctx_2.fillText(item.name, LabelCoordinate.INITIAL_X, currentLabelY);
+            ctx_2.restore();
+            ctx_2.fillRect(currentBarX, BarCoordinate.INITIAL_Y, BarSize.WIDTH, -barHeight);
+
+            currentBarX += gapBetweenBars;
+            currentLabelY += gapBetweenBars;
+          }
+        };
+
         formElement.addEventListener(`submit`, (evt) => {
           evt.preventDefault();
           renderChart(getData(inputElements));
+
           formElement.reset();
-          el.classList.toggle('invisible');
+
+          el[0].classList.toggle('invisible');
         });
+        formElement_2.addEventListener(`submit`, (evt) => {
+          evt.preventDefault();
+          renderChart_2(getData(inputElements_2));
+          el[1].classList.toggle('invisible');
+          formElement_2.reset();
+        });
+
 
     </script>
 

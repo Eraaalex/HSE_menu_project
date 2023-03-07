@@ -120,9 +120,19 @@ def accountPage(name):
     if (user is None):
         return render_template("error404.html")
     orders_of_day = [] if (user.status) else db.session.query(Orders).filter(func.DATE(Orders.date) == date.today()) # is employee
-    lunches = [] if (user.status) else db.session.query(Lunch).all()[:18]
+    lunches = [] if (user.status) else sorted(db.session.query(Lunch).all()[:18], key = lambda x: x.id)
+    print(lunches)
+    # transaction statistics:
+    orders_all = [0]*18 # for lunches
+    for i in range(18):
+        #orders_all[i] = len(db.session.query(Orders).filter_by(id = i).all())
+        orders_all[i] = random.randint(0, 100)
+    print(orders_all)
+
+
     return render_template('userPage.html', user = user, addition= "/cart", registered = "/"+current_user.name,
-                           orders = orders_of_day, lunches = lunches)
+                           orders = orders_of_day, lunches = lunches, orders_all = orders_all,
+                           student = "invisible" if (current_user.status) else "")
 
 @login_manager.user_loader
 def load_user(userid):
@@ -167,11 +177,14 @@ def page_not_found():
     return render_template('error404.html')
 
 def logged_in(): return current_user.get_id() is not None
-
+flag = True
 if __name__ == '__main__':
     with app.app_context():
+        db.drop_all()
         db.create_all()
-        basic_input()
+        if (flag):
+            flag = False
+            basic_input()
         print("OK")
 
     app.run(debug=True)

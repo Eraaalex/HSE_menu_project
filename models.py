@@ -25,6 +25,7 @@ class Users(UserMixin, db.Model):
 
 class Lunch(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String)
     appetizer_id = db.Column(db.Integer,db.ForeignKey('appetizer.id'))
     dish_id = db.Column(db.Integer,db.ForeignKey('dish.id'))
     drink_id = db.Column(db.Integer,db.ForeignKey('drink.id'))

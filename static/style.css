@@ -472,7 +472,7 @@ fade.show {
 .chart {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 40px;
   min-width: 800px;
   margin: 0 auto;
 }
@@ -487,14 +487,10 @@ fade.show {
   text-align: center;
 }
 
-.chart__data {
-height: 250px;
-}
-
-.chart__input-group {
+/*.chart__input-group {
   display: flex;
   align-items: center;
-}
+}*/
 
 .chart__input-group:last-of-type {
 }
@@ -512,14 +508,15 @@ height: 250px;
 }
 
 .chart__submit-button {
-  width: 100%;
+  width:90px;
   padding: 10px;
   cursor: pointer;
 }
 
 
 .chart__canvas-wrapper {
-height: 250px;
+  height: 250px;
   border: 1px solid #8e8d8a;
   border-radius: 5px;
+  max-width: 830px;
 }
