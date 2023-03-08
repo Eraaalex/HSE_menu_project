@@ -31,15 +31,6 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install PostgreSQL client
-          run: |
-      sudo apt-get update
-      sudo apt-get install --yes postgresql-client
-
-      - name: Test database connection
-          run: psql -h postgres -d postgres_db -U postgres -c 'SELECT 1;'
-          env:
-      PGPASSWORD: eralex
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
