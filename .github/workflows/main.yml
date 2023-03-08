@@ -23,6 +23,17 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - name: Start PostgreSQL on Ubuntu
+          run: |
+            sudo systemctl start postgresql.service
+            pg_isready
+      - name: Create
+        run: |
+          sudo -u postgres psql --command="CREATE USER postgres PASSWORD 'eralex'" --command="\du"
+      - name: Create timetable database
+        run: |
+          sudo -u postgres createdb --owner=postgres timetable
+          PGPASSWORD=eralex psql --username=postgres --host=localhost --list timetable
       - uses: actions/checkout@v3
 
       - name: Set up Python 3.9
@@ -39,6 +50,6 @@ jobs:
         run: |
           python test_app.py
         env:
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: postgres
           # The default PostgreSQL port
           POSTGRES_PORT: 5432
