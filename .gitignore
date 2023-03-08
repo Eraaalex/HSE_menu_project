@@ -1,3 +1,6 @@
 /.idea
 .gitignore
 /__pycache__
+docker-compose.yml
+Dockerfile
+test.txt

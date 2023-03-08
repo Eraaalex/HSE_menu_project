@@ -4,18 +4,27 @@
 <div class="content_week">
     <div class="container">
         <div class="grid" style="overflow-y:scroll">
-            {% for lunch in lunches %}
+            {% for i in range(18) %}
             <div class="card_container">
                 <div class="menu_card">
                     <ul>
-                        <h5 class="day_of_week">monday</h5>
+                        <h5 class="day_of_week">{{weekday[i//3]}}</h5>
                         <h5 class="headers">first course</h5>
-                        <li class="dishes">{{ lunch.get_appetizer_name() }}</li>
+                        <li class="dishes">{{ lunches[i].get_appetizer_name() }}</li>
                         <h5 class="headers">second course</h5>
-                        <li class="dishes">{{lunch.get_dish_name()}}</li>
+                        <li class="dishes">{{lunches[i].get_dish_name()}}</li>
                         <h5 class="headers">drink</h5>
-                        <li class="dishes">{{lunch.get_drink_name()}}</li>
-                        <h5 class="type">business lunch</h5>
+                        <li class="dishes">{{lunches[i].get_drink_name()}}</li>
+                        {% if lunches[i].name[:3] == "std" %}
+                        <h5 class="type">standart lunch</h5>
+                        {% else %}
+                            {%  if lunches[i].name[:3] == "bsn" %}
+                                <h5 class="type">business lunch</h5>
+
+                            {% else %}
+                                <h5 class="type">vegetarian lunch</h5>
+                            {% endif %}
+                        {% endif %}
                     </ul>
                 </div>
             </div>

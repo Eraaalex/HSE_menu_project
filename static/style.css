@@ -563,11 +563,6 @@ fade.show {
     height: 380px;
 }
 
-/*.slide1 { background-image: url(http://habrastorage.org/files/3f2/628/bd5/3f2628bd58c8452db516195cb0c9bfc9.jpg); }*/
-.slide2 { background-image: url(http://habrastorage.org/files/3e1/95d/c7f/3e195dc7f5a64469807f49a14f97ba0e.jpg); }
-.slide3 { background-image: url(https://ih1.redbubble.net/image.568049702.8517/fposter,small,wall_texture,product,750x1000.u2.jpg); }
-
-
  .controls {
 	/*left: 80%;*/
 	line-height: 10px;
@@ -625,8 +620,14 @@ margin: 0;
 .wrapper label:hover,
 #slide1:checked ~ .controls label:nth-of-type(1),
 #slide2:checked ~ .controls label:nth-of-type(2),
-#slide3:checked ~ .controls label:nth-of-type(3) {
-	background: #F0EDE3;;
+#slide3:checked ~ .controls label:nth-of-type(3),
+#slide4:checked ~ .controls label:nth-of-type(3),
+#slide5:checked ~ .controls label:nth-of-type(3),
+#slide6:checked ~ .controls label:nth-of-type(3),
+#slide7:checked ~ .controls label:nth-of-type(3),
+#slide8:checked ~ .controls label:nth-of-type(3),
+#slide9:checked ~ .controls label:nth-of-type(3), {
+	background: #F0EDE3;
 }
 .slides img{
 	opacity: 0;
@@ -646,7 +647,13 @@ margin: 0;
 
 #slide1:checked ~ .slider > .slide1,
 #slide2:checked ~ .slider > .slide2,
-#slide3:checked ~ .slider > .slide3 {
+#slide3:checked ~ .slider > .slide3,
+#slide4:checked ~ .slider > .slide4,
+#slide5:checked ~ .slider > .slide5,
+#slide6:checked ~ .slider > .slide6
+#slide7:checked ~ .slider > .slide7,
+#slide8:checked ~ .slider > .slide8,
+#slide9:checked ~ .slider > .slide9{
 	opacity: 1;
 	z-index: 1;
 	-webkit-transform: scale(1);

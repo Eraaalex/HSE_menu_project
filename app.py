@@ -70,8 +70,8 @@ def index():
     if not logged_in():
         reg = ""
     else: reg = "/" + current_user.name
-    return render_template("index.html",lunches = lunches,
-                          activeT = "active", activeW = "", addition = addit, registered = reg, drink = "drink_1")
+    return render_template("index.html", day = datetime.now().strftime("%A").upper(),lunches = lunches,
+                          activeT = "active", activeW = "", addition = addit, registered = reg)
 
 @app.route('/week')
 def weekPage():
@@ -79,7 +79,8 @@ def weekPage():
     if not logged_in():
         reg = ""
     else: reg = "/" + current_user.name
-    return render_template("week.html", lunches = db.session.query(Lunch).all(),
+    day_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    return render_template("week.html", weekday = day_of_week, lunches = sorted(db.session.query(Lunch).all(), key = lambda x: x.id),
                            activeT = "", activeW = "active", style_name = "week", addition = addit, registered = reg)
 
 @app.route('/cart_empty')
@@ -121,7 +122,7 @@ def accountPage(name):
         return render_template("error404.html")
     orders_of_day = [] if (user.status) else db.session.query(Orders).filter(func.DATE(Orders.date) == date.today()) # is employee
     lunches = [] if (user.status) else sorted(db.session.query(Lunch).all()[:18], key = lambda x: x.id)
-    print(lunches)
+
     # transaction statistics:
     orders_all = [0]*18 # for lunches
     for i in range(18):
