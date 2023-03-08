@@ -10,19 +10,19 @@ def addUser(login ="admin@admin.ru", password = "qwerty1",name = "Admin", status
 
     return user
 
-def addAppetizer(name = "Appetizer_1", photo = "img.img"):
+def addAppetizer(name = "Appetizer_1", photo = "drink_1"):
     appetizer = Appetizer(name = name, photo = photo)
     db.session.add(appetizer)
     db.session.commit()
     return appetizer
 
-def addDish(name = "Appetizer_1", photo = "img.img"):
+def addDish(name = "Appetizer_1", photo = "dish1"):
     dish = Dish(name = name, photo = photo)
     db.session.add(dish)
     db.session.commit()
     return dish
 
-def addDrink(name = "Appetizer_1", photo = "img.img"):
+def addDrink(name = "Appetizer_1", photo = "app1"):
     drink = Drink(name = name, photo = photo)
     db.session.add(drink)
     db.session.commit()

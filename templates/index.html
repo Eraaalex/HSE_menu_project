@@ -38,9 +38,26 @@
                 
             </div>
 
-            <div class="photo">
-                <img src="" alt="PHOTO">
-            </div>
+            <div class="wrapper photo">
+    <input type="radio" name="point" id="slide1" checked>
+    <input type="radio" name="point" id="slide2">
+    <input type="radio" name="point" id="slide3">
+    <div class="slider">
+
+        <div class = "photo slides slide1"
+             style="background-image: url(../../static/img/{{ lunch.get_appetizer_photo()}}.jpg);"></div>
+        <div class = "photo slides slide2" style="background-image: url(../../static/img/{{lunch.get_dish_photo()}}.jpg);"></div>
+        <div class = "photo slides slide3" style="background-image: url(../../static/img/{{lunch.get_drink_photo()}}.jpg);"></div>
+        </div>
+    <div class="controls">
+        <label for="slide1"></label>
+        <label for="slide2"></label>
+        <label for="slide3"></label>
+    </div>
+</div>
+
+
+
             <form action="/" method="POST">
                     <input class = "invisible" type="hidden" name="add_to_cart">
                     <input class = "invisible" type="hidden" name="lunch_id" value="{{ lunch.id }}">
@@ -49,8 +66,11 @@
             </form>
             {% endfor %}
         </div>
-        
+
     </div>
+
+
+
 
 
 {% endblock %}

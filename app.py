@@ -71,7 +71,7 @@ def index():
         reg = ""
     else: reg = "/" + current_user.name
     return render_template("index.html",lunches = lunches,
-                          activeT = "active", activeW = "", addition = addit, registered = reg)
+                          activeT = "active", activeW = "", addition = addit, registered = reg, drink = "drink_1")
 
 @app.route('/week')
 def weekPage():
@@ -157,7 +157,6 @@ def cart():
     global local_cart
     if request.method == 'POST':
         user = db.session.query(Users).filter_by(id = current_user.get_id()).first()
-        print(user.name)
         for el in local_cart:
             addOrder(user.id, el['lunch'].id)
         local_cart = []

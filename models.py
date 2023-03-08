@@ -38,9 +38,15 @@ class Lunch(db.Model):
     def get_appetizer_name(self):
         return db.session().query(Appetizer).filter_by(id = self.appetizer_id).first().name
     def get_dish_name(self):
-        return db.session().query(Dish).filter_by(id = self.appetizer_id).first().name
+        return db.session().query(Dish).filter_by(id = self.dish_id).first().name
     def get_drink_name(self):
-        return db.session().query(Drink).filter_by(id = self.appetizer_id).first().name
+        return db.session().query(Drink).filter_by(id = self.drink_id).first().name
+    def get_drink_photo(self):
+        return db.session().query(Drink).filter_by(id = self.drink_id).first().photo
+    def get_appetizer_photo(self):
+        return db.session().query(Appetizer).filter_by(id = self.appetizer_id).first().photo
+    def get_dish_photo(self):
+        return db.session().query(Dish).filter_by(id = self.dish_id).first().photo
 
 class Appetizer(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
