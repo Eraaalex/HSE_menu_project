@@ -41,9 +41,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Test database connection
-          run: psql -h postgres -d postgres_db -U postgres -c 'SELECT 1;'
-          env:
-              PGPASSWORD: eralex
+        run: |
+          psql -h postgres -d postgres_db -U postgres -c 'SELECT 1;'
+        env:
+            PGPASSWORD: eralex
       - name: Run unit tests
         run: |
           python test_app.py
