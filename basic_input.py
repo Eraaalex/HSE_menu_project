@@ -60,7 +60,6 @@ def basic_input():
                        likes_amount= random.randint(1, 100), dislikes_amount=random.randint(1,100))
 
     user = addUser(status = False)
-    addOrder(user.id, lun.id)
 
 # from app import app
 # with app.app_context():

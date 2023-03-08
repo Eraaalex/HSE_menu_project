@@ -8,23 +8,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     services:
-      # Label used to access the service container
       postgres:
-        # Docker Hub image
         image: postgres
-        # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: eralex
-        # Set health checks to wait until postgres has started
+            POSTGRES_DB: postgres_db
+            POSTGRES_PASSWORD: eralex
+            POSTGRES_PORT: 5432
+            POSTGRES_USER: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
         ports:
-          # Maps tcp port 5432 on service container to the host
           - 5432:5432
     steps:
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+      - name: Query database
+        run: psql -h postgres -d postgres_db -U postgres -c 'SELECT 1;'
+        env:
+          PGPASSWORD: eralex
       - uses: actions/checkout@v3
 
       - name: Set up Python 3.9
@@ -39,9 +45,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          python app_test.py
+          python test_app.py
         env:
-          # The hostname used to communicate with the PostgreSQL service container
-          POSTGRES_HOST: postgres
-          # The default PostgreSQL port
+          POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
