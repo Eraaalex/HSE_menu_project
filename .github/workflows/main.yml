@@ -23,6 +23,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - uses: actions/checkout@v3
       - name: Start PostgreSQL on Ubuntu
           run: |
             sudo systemctl start postgresql.service
@@ -34,7 +35,7 @@ jobs:
         run: |
           sudo -u postgres createdb --owner=postgres timetable
           PGPASSWORD=eralex psql --username=postgres --host=localhost --list timetable
-      - uses: actions/checkout@v3
+      
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
