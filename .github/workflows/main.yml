@@ -23,14 +23,6 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - name: Install PostgreSQL client
-        run: |
-          apt-get update
-          apt-get install --yes postgresql-client
-      - name: Query database
-        run: psql -h postgres -d postgres_db -U postgres -c 'SELECT 1;'
-        env:
-          PGPASSWORD: eralex
       - uses: actions/checkout@v3
 
       - name: Set up Python 3.9
@@ -48,4 +40,5 @@ jobs:
           python test_app.py
         env:
           POSTGRES_HOST: localhost
+          # The default PostgreSQL port
           POSTGRES_PORT: 5432
