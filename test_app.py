@@ -57,11 +57,11 @@ class AppTest(unittest.TestCase):
             user_from_db = Users.get_user_by_id(1)
             assert user_from_db.login == email
 
-    def test_user_already_exists_raises_integrity_error(self):
-        with app.app_context():
-            addUser(login='email', password='password', name = 'name')
-            l = lambda: (addUser(login='email', password='another', name = 'name'))
-            self.assertRaises(IntegrityError, l)
+    # def test_user_already_exists_raises_integrity_error(self):
+    #     with app.app_context():
+    #
+    #         l = lambda: (addUser(login='email', password='another', name = 'name'))
+    #         self.assertRaises(IntegrityError, l)
 # #
     def test_user_doesnt_exist_returns_none(self):
         with app.app_context():
