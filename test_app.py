@@ -2,18 +2,11 @@
 # 'python -m unittest -v test_app.py' to produce more verbose output
 # pep8 --first app.py
 from sqlalchemy.exc import IntegrityError
-
+from app import app, db
 import unittest
 import logging
 from service import *
 
-app = Flask(__name__)
-app.secret_key = 'secret'
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:eralex@localhost:5432/project_db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.init_app(app)
 
 class AppTest(unittest.TestCase):
     # web = app.app.test_client()

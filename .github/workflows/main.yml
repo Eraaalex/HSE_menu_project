@@ -47,6 +47,8 @@ jobs:
             PGPASSWORD: eralex
       - name: Run unit tests
         run: |
+          flask db upgrade
+          flask run
           python test_app.py
         env:
           POSTGRES_HOST: localhost
