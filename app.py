@@ -27,7 +27,7 @@ app.secret_key = 'secret'
 #         port=DBPORT,
 #         db=DBNAME)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:eralex@localhost:5432/postgres_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:eralex@localhost:5432/project_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
