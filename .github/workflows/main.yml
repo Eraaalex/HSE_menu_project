@@ -42,7 +42,7 @@ jobs:
           pip install -r requirements.txt
       - name: Test database connection
         run: |
-          psql -h localhost -d postgres_db -U postgres -c 'SELECT 1;'
+          psql -h localhost -d postgres_db -U postgres -c test.txt
         env:
             PGPASSWORD: eralex
       - name: Run unit tests
