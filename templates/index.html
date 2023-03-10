@@ -53,11 +53,12 @@
     <input type="radio" name="point" id="slide{{i*3+3}}">
     <div class="slider">
 
-        <div class = "photo slides slide{{i*3+1}}"
-             style="background-image: url(../../static/img/{{ lunches[i].get_appetizer_photo()}}.jpg);"></div>
+
         <div class = "photo slides slide{{i*3+2}}" style="background-image: url(../../static/img/{{lunches[i].get_dish_photo()}}.jpg);"></div>
         <div class = "photo slides slide{{i*3+3}}" style="background-image: url(../../static/img/{{lunches[i].get_drink_photo()}}.jpg);"></div>
-        </div>
+        <div class = "photo slides slide{{i*3+1}}"
+             style="background-image: url(../../static/img/{{lunches[i].get_appetizer_photo()}}.jpg);"></div>
+    </div>
     <div class="controls">
         <label for="slide{{i*3+1}}"></label>
         <label for="slide{{i*3+2}}"></label>

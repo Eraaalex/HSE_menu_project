@@ -16,13 +16,13 @@
                         <h5 class="headers">drink</h5>
                         <li class="dishes">{{lunches[i].get_drink_name()}}</li>
                         {% if lunches[i].name[:3] == "std" %}
-                        <h5 class="type">standart lunch</h5>
+                        <h5 class="type_week">standart lunch</h5>
                         {% else %}
                             {%  if lunches[i].name[:3] == "bsn" %}
-                                <h5 class="type">business lunch</h5>
+                                <h5 class="type_week">business lunch</h5>
 
                             {% else %}
-                                <h5 class="type">vegetarian lunch</h5>
+                                <h5 class="type_week">vegetarian lunch</h5>
                             {% endif %}
                         {% endif %}
                     </ul>
