@@ -3,11 +3,11 @@
 {% block content %}
 
 <div class="content_cart">
-      <p>User information: {{user.name}} {{user.login}}</p>
+      <p class="user">{{user.name}} --- {{user.login}}</p>
 
         {% for el in cart %}
         <div>
-            <p>Amount in cart: {{ el['qty'] }}</p>
+            <p class="amount">Amount in cart: {{ el['qty'] }}</p>
             <ul class="cart_item">
                 <li>{{ el['lunch'].get_appetizer_name()}} </li>
                 <li>{{ el['lunch'].get_dish_name()}} </li>
@@ -19,7 +19,7 @@
             <form action="/cart" method="POST">
                     <input class = "invisible" type="hidden" name="add_to_cart">
                     <input class = "invisible" type="hidden" name="cart" value="nothing">
-                    <input type="submit" class="select" value="ORDER" >
+                    <input type="submit" class="select_cart" value="ORDER" >
             </form>
 
 </div>

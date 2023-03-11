@@ -47,13 +47,19 @@ header {
 .menu li a.icons {
     width: 60px;
     background: #E98074;
+    height: 60px;
+}
+
+.menu li a.icons img {
+    width: 30px;
+    height: 30px;
+    transform: translateY(30%);
 }
 
 .menu li.static {
     background: #8E8D8A;
     width: 120px;
 }
-
 
 .menu a.active {
     background: #E85A4F;
@@ -104,6 +110,7 @@ body {
     text-align: center;
     vertical-align: middle;
     height: 100%;
+
     margin-bottom: 0;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
     
@@ -126,12 +133,13 @@ body {
     background: #8E8D8A;
     width: 100%;
     color: #D3C9BB;
-    height: 33px;
+    height: 35px;
     vertical-align: middle;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     font-size: 17px;
     line-height: 33px;
+    margin-left: -2px;
 
 }
 
@@ -152,7 +160,7 @@ body {
     border-radius: 30px;
     margin-top: 15px;
 }
-photo{
+/*photo{
    margin: 100px auto 0;
     position: relative;
 
@@ -163,31 +171,73 @@ photo{
     text-align: center;
     background: #D3C9BB;
     border-radius: 35px;
+}*/
+
+.buttons {
+    float: left;
+    height: 50px;
+    width: 650px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    list-style-type: 0;
 }
 
-.select {
+.invisible {
+    width: 0px;
+}
+.buttons li {
+    display: inline-block;
+}
+
+.buttons li form {
+    margin-top: 0;
+    margin-left: 5px;
+}
+
+.buttons .select {
     background: #E98074;
-    border-radius: 20px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: 0;
     border-style: none;
-    width: 70%;
-    height: 30px;
+    width: 500px;
+    height: 40px;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: white;
     font-size: 16px;
     font-style: normal;
-    margin-top: 30px;
     align-items: center;
-    position: relative;
-    left:10%;
-    margin-bottom: 80px;
+    margin-right: 10px;
 
 }
 
+.buttons .like {
+    background: #E98074;
+    border-style: none;
+    margin-top: 10px;
+    width: 60px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 40px;
+}
 
-.select:hover {
+.buttons .like img {
+    height: 19px;
+    margin-bottom: 0;
+}
+
+
+.like:hover, .select:hover  {
+    background:#E85A4F;   
+}
+
+.select:focus , .select:focus {
     background:#E85A4F;
 }
-
 
 
 /* week */
@@ -289,6 +339,44 @@ photo{
     font-size: 16px;
 }
 
+.select_cart {
+    background: #E98074;
+    border-radius: 30px;
+    margin-top: 0;
+    border-style: none;
+    width: 70%;
+    height: 30px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-style: normal;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 15%;
+
+}
+
+.select_cart:hover {
+    background: #E85A4F;
+}
+
+.amount {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.user {
+    background: #8E8D8A;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    width: 50%;
+    margin-left: 25%;
+    height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+}
 
 
 /*Options*/
@@ -314,6 +402,11 @@ photo{
 }
 
 /* Account */
+
+.content_account{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 .btnAcc{
   color: black;
   height: 40px;
@@ -357,7 +450,6 @@ photo{
   cursor: pointer;
   outline: 1px solid  #d9d9d9;
   color: #000;
-  font-family:"Montserrat", monospace;
   font-weight: 400;
   background-color: #f2f2f2;
 }
@@ -443,7 +535,7 @@ margin-top : 100px;
 }
 
 
-/* Это взято с бутстрап, ну пушо я не хочу эти штуки писать :)*/
+/* Это взято с бутстрап */
 .alert{
     position:relative;
     padding:1rem 1rem;
@@ -611,10 +703,10 @@ margin: 0;
 	-moz-border-radius: 50%;
 	-o-border-radius: 50%;
 	border-radius: 50%;
-	-webkit-transition: background ease-in-out .5s;
-	-moz-transition: background ease-in-out .5s;
-	-o-transition: background ease-in-out .5s;
-	transition: background ease-in-out .5s;
+	-webkit-transition: ease-in-out .5s;
+	-moz-transition:  ease-in-out .5s;
+	-o-transition:  ease-in-out .5s;
+	transition:  ease-in-out .5s;
 }
 
 .wrapper label:hover,
@@ -626,7 +718,7 @@ margin: 0;
 #slide6:checked ~ .controls label:nth-of-type(3),
 #slide7:checked ~ .controls label:nth-of-type(3),
 #slide8:checked ~ .controls label:nth-of-type(3),
-#slide9:checked ~ .controls label:nth-of-type(3), {
+#slide9:checked ~ .controls label:nth-of-type(3) {
 	background: #F0EDE3;
 }
 .slides img{
