@@ -18,16 +18,8 @@ DBNAME = 'project'
 app = Flask(__name__)
 app.secret_key = 'secret'
 
-# # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
-# app.config['SQLALCHEMY_DATABASE_URI'] = \
-#     'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
-#         user=DBUSER,
-#         passwd=DBPASS,
-#         host=DBHOST,
-#         port=DBPORT,
-#         db=DBNAME)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@db:5432/project_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
