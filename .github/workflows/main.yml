@@ -43,7 +43,7 @@ jobs:
 
       - name: Test database connection
         run: |
-          psql -h localhost -d project_db -U postgres -c 'SELECT 1;'
+          psql -h db -d project_db -U postgres -c 'SELECT 1;'
         env:
             PGPASSWORD: eralex
 
