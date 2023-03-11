@@ -42,28 +42,60 @@
                     {% else %}
                         <h5 class="type_main">vegetarian lunch</h5>
                     {% endif %}
-                {% endif %}
-            </li>
-            
-        </div>
+              {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-        <div class="wrapper photo">
-            <input type="radio" name="point" id="slide{{i*3+1}}" checked>
-            <input type="radio" name="point" id="slide{{i*3+2}}">
-            <input type="radio" name="point" id="slide{{i*3+3}}">
-            <div class="slider">
+        <div class="holder" style="overflow-y:scroll">
+            {% for i in range(3) %}
 
-                <div class = "photo slides slide{{i*3+1}}"
-                    style="background-image: url(../../static/img/{{lunches[i].get_appetizer_photo()}}.jpg);"></div>
-                <div class = "photo slides slide{{i*3+2}}" style="background-image: url(../../static/img/{{lunches[i].get_dish_photo()}}.jpg);"></div>
-                <div class = "photo slides slide{{i*3+3}}" style="background-image: url(../../static/img/{{lunches[i].get_drink_photo()}}.jpg);"></div>
+            <div class="description">
+                <li>
+                    <h5 class="day_of_week_main">{{day}}</h5>
+                    <h3>first dish</h3>
+                    <h4 class="dishes">
+                        {{ lunches[i].get_appetizer_name()}}
+                    </h4>
+                    <h3>second dish</h3>
+                    <h4 class="dishes">
+                        {{ lunches[i].get_dish_name()}}
+                    </h4>
+                    <h3>a drink</h3>
+                    <h4 class="dishes">
+                        {{ lunches[i].get_drink_name()}}
+                    </h4>
+                     {% if lunches[i].name[:3] == "std" %}
+                        <h5 class="type">standart lunch</h5>
+                        {% else %}
+                            {%  if lunches[i].name[:3] == "bsn" %}
+                                <h5 class="type">business lunch</h5>
+
+                            {% else %}
+                                <h5 class="type">vegetarian lunch</h5>
+                            {% endif %}
+                        {% endif %}
+                </li>
+                
             </div>
-            <div class="controls">
-                <label for="slide{{i*3+1}}"></label>
-                <label for="slide{{i*3+2}}"></label>
-                <label for="slide{{i*3+3}}"></label>
-            </div>
-        </div>
+
+            <div class="wrapper photo">
+    <input type="radio" name="point" id="slide{{i*3+1}}" checked>
+    <input type="radio" name="point" id="slide{{i*3+2}}">
+    <input type="radio" name="point" id="slide{{i*3+3}}">
+    <div class="slider">
+
+
+        <div class = "photo slides slide{{i*3+2}}" style="background-image: url(../../static/img/{{lunches[i].get_dish_photo()}}.jpg);"></div>
+        <div class = "photo slides slide{{i*3+3}}" style="background-image: url(../../static/img/{{lunches[i].get_drink_photo()}}.jpg);"></div>
+        <div class = "photo slides slide{{i*3+1}}"
+             style="background-image: url(../../static/img/{{lunches[i].get_appetizer_photo()}}.jpg);"></div>
+    </div>
+    <div class="controls">
+        <label for="slide{{i*3+1}}"></label>
+        <label for="slide{{i*3+2}}"></label>
+        <label for="slide{{i*3+3}}"></label>
+    </div>
+</div>
 
 
         <ul class="buttons">

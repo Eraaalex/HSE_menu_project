@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: eralex
+      POSTGRES_DB: project_db
+  app:
+    image: app
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db

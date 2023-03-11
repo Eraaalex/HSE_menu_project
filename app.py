@@ -12,22 +12,14 @@ from datetime import date
 DBUSER = 'postgres'
 DBPASS = 'eralex'
 DBHOST = 'localhost'
-DBPORT = '5432'
+DBPORT = '5000'
 DBNAME = 'project'
 
 app = Flask(__name__)
 app.secret_key = 'secret'
 
-# # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
-# app.config['SQLALCHEMY_DATABASE_URI'] = \
-#     'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
-#         user=DBUSER,
-#         passwd=DBPASS,
-#         host=DBHOST,
-#         port=DBPORT,
-#         db=DBNAME)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:eralex@localhost:5432/project_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@db:5432/project_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -45,10 +37,9 @@ local_cart=[]
 @app.route('/',methods=['GET', 'POST'])
 def index():
     day_of_week = datetime.now().weekday()
-    lunches = []
-    lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 1).scalar())
-    lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 2).scalar())
-    lunches.append(db.session.query(Lunch).filter_by(id = day_of_week*3 + 3).scalar())
+    lunches = [db.session.query(Lunch).filter_by(id = day_of_week*3 + 1).scalar(),
+               db.session.query(Lunch).filter_by(id = day_of_week*3 + 2).scalar(),
+               db.session.query(Lunch).filter_by(id = day_of_week*3 + 3).scalar()]
     if (lunches is None or lunches == []):
         return render_template('eror404.html')
     addit = "/cart" if (logged_in()) else "/cart_empty"
@@ -180,14 +171,13 @@ def logged_in(): return current_user.get_id() is not None
 flag = True
 if __name__ == '__main__':
     with app.app_context():
-        db.drop_all()
         db.create_all()
         if (flag):
             flag = False
             basic_input()
         print("OK")
 
-    app.run(debug=True)
+    app.run(debug=True, host ='0.0.0.0')
 
 
 

@@ -39,11 +39,13 @@ def basic_input():
     drks =[]
     f = f[1:]
     for i in range(18):
-        apps.append(addAppetizer(name = f[i%6], photo= f[i%6].lower()))
+        apps.append(addAppetizer(name = f[i%6], photo= f[i%6].lower().replace(" ", "_")))
 
     for i in range(6, 6+18):
-        dshs.append(addDish(name = f[i], photo=f[i].lower()))
-    drinks = ["drink_1", "drink_2"]
+        dshs.append(addDish(name = f[i], photo=f[i].lower().replace(" ", "_")))
+
+    drinks = ["drink_1", "drink_3"]
+
     for i in range(6+18, 12+18):
         drks.append(addDrink(name = f[i], photo = drinks[i%2]))
 

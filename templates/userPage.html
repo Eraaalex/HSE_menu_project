@@ -4,9 +4,13 @@
 {% block content %}
 
 <div class="containerForAcc">
-    <p>{{user.name}}</p>
-    <p>{{user.login}}</p>
-
+    <div class ="title_account">Личный кабинет</div>
+    <div class = "separator">   </div>
+    <h3 class="topic_account">Информация об аккаунте: </h3>
+    <div class="container_account">
+        <div class = "information_acc" >Имя: {{user.name}}</div>
+        <div class = "information_acc" >Логин: {{user.login}}</div>
+    </div>
 
 
     <table class ="{{student}}">
@@ -29,7 +33,7 @@
     <div>
         <a href="/logout">LogOut</a>
     </div>
-
+{% if not user.status %}
     <section class="chart">
       <h1 class="chart__title {{student}}">By likes: </h1>
 
@@ -66,7 +70,7 @@
       </div>
     </section>
 
-
+{% endif %}
 
     <script>
 
