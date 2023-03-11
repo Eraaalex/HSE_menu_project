@@ -51,5 +51,5 @@ jobs:
         run: |
           python test_app.py
         env:
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: db
           POSTGRES_PORT: 5432
