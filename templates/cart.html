@@ -3,24 +3,35 @@
 {% block content %}
 
 <div class="content_cart">
-      <p>Hello, {{user.name}}! That's your cart</p>
+    <p class="user">Hello, {{user.name}}! That's your cart</p>
 
+    <div class="cart_holder">
         {% for el in cart %}
-        <div>
+        <div class="cart_item">
             <p class="amount">Amount in cart: {{ el['qty'] }}</p>
-            <ul class="cart_item">
-                <li>{{ el['lunch'].get_appetizer_name()}} </li>
-                <li>{{ el['lunch'].get_dish_name()}} </li>
-                <li>{{ el['lunch'].get_drink_name()}}</li>
-
+            <ul>
+                <h3>first dish</h3>
+                <li class="dishes">
+                    {{ el['lunch'].get_appetizer_name()}}
+                </li>
+                <h3>second dish</h3>
+                <li class="dishes">
+                    {{ el['lunch'].get_dish_name()}}
+                </li>
+                <h3>a drink</h3>
+                <li class="dishes">
+                    {{ el['lunch'].get_drink_name()}}
+                </li>
             </ul>
         </div>
         {% endfor %}
-            <form action="/cart" method="POST">
-                    <input class = "invisible" type="hidden" name="add_to_cart">
-                    <input class = "invisible" type="hidden" name="cart" value="nothing">
-                    <input type="submit" class="select_cart" value="ORDER" >
-            </form>
+    </div>
+        
+    <form action="/cart" method="POST">
+            <input class = "invisible" type="hidden" name="add_to_cart">
+            <input class = "invisible" type="hidden" name="cart" value="nothing">
+            <input type="submit" class="select_cart" value="ORDER" >
+    </form>
 
 </div>
 

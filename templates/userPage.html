@@ -4,14 +4,21 @@
 {% block content %}
 
 <div class="containerForAcc">
-    <div class ="title_account">Личный кабинет</div>
-    <div class = "separator">   </div>
-    <h3 class="topic_account">Информация об аккаунте: </h3>
-    <div class="container_account">
-        <div class = "information_acc" >Имя: {{user.name}}</div>
-        <div class = "information_acc" >Логин: {{user.login}}</div>
+    <div class ="title_account">personal account</div>
+    <div class="bio">
+        <h3 class="topic_account">Bio:</h3>
+        <div class="container_account">
+            <div class = "information_acc" >Name: {{user.name}}</div>
+            <div class = "information_acc" >Login: {{user.login}}</div>
+        </div>
+    
+
+        <div>
+            <a class="logout" href="/account">LOG OUT</a>
+        </div>
     </div>
 
+  
 
     <table class ="{{student}}">
         <tr>
@@ -30,14 +37,12 @@
         </tr>
         {% endfor%}
     </table>
-    <div>
-        <a href="/logout">LogOut</a>
-    </div>
+
 {% if not user.status %}
     <section class="chart">
-      <h1 class="chart__title {{student}}">By likes: </h1>
+        <h1 class="chart__title {{student}}">By likes: </h1>
 
-      <form class="chart__data" action="#" method="POST">
+        <form class="chart__data" action="#" method="POST">
         {% for lunch in lunches %}
            <div class="chart__input-group invisible">
           <label class="chart__label invisible" for="{{lunch.name}}">{{lunch.name}} </label>
