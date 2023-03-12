@@ -877,6 +877,26 @@ margin: 0;
 }
 
 
-.logout:hover{
+.logout:hover, .login_btn:hover{
     background: #E85A4F;
+}
+
+/* cart empty */
+
+.login_btn {
+    background: #E98074;
+    border-radius: 30px;
+    border-style: none;
+    width: 10%;
+    height: 40px;
+    align-items: center;
+    position: fixed;
+    text-align: center;
+    color: white;
+    font-style: normal;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    line-height: 40px;
+    text-decoration: none;
+    margin-top: 20px;
 }

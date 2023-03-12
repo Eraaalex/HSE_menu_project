@@ -3,36 +3,36 @@ import random
 from service import *
 def basic_input():
     f = '''
-Оливье
-Морковь по-корейски
-Салат из капусты с огурцом
-Цезарь
-Салат крабовый
-Греческий салат
-Борщ
-Рассольник с курицей
-Суп с вермишелью
-Щи с квашеной капустой
-Суп гороховый
-Суп пюре овощной
-Суп пюре овощной
-Щи с квашеной капустой
-пюре
-Суп гороховый
-Суп с вермишелью
-Суп гороховый
-Ленивые голубцы
-Паста болоньезе
-Плов с говядиной
-Пюре
-Киноа с говядиной
-Макароны в сливочном соусе
-Яблочный сок
-Вишневый сок
-Апельсиновый сок
-Компот
-Яблочный сок
-Вишневый сок
+Olivier salad
+Korean carrots
+Cabbage salad with cucumber
+Caesar salad
+Crab salad
+Greek salad
+Borsch
+Pickle with chicken
+Soup with vermicelli
+Cabbage soup with sauerkraut
+Pea soup
+Vegetable puree soup
+Vegetable puree soup
+Cabbage soup with sauerkraut
+Mashed potatoes
+Pea soup
+Soup with vermicelli
+Pea soup
+Cabbage rolls
+Pasta bolognese
+Pilaf with beef
+Mashed potatoes
+Quinoa with beef
+Pasta in cream sauce
+Apple juice
+Cherry juice
+Orange juice
+Compote
+Apple juice
+Cherry juice
     '''.split("\n")
     apps =[]
     dshs =[]
