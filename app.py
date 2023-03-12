@@ -168,11 +168,12 @@ def logged_in(): return current_user.get_id() is not None
 flag = True
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        if flag:
+            db.create_all()
+            flag = False
         basic_input()
-        print("OK")
 
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port = 5000)
 
 
 
