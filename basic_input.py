@@ -39,10 +39,10 @@ Cherry juice
     drks =[]
     f = f[1:]
     for i in range(18):
-        apps.append(addAppetizer(name = f[i%6], photo= f[i%6].lower().replace(" ", "_")))
+        apps.append(addAppetizer(name = f[i%6], photo= f[i%6].replace(" ", "_")))
 
     for i in range(6, 6+18):
-        dshs.append(addDish(name = f[i], photo=f[i].lower().replace(" ", "_")))
+        dshs.append(addDish(name = f[i], photo=f[i].replace(" ", "_")))
 
     drinks = ["drink_1", "drink_3"]
 

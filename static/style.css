@@ -587,6 +587,9 @@ margin-top : 100px;
     margin-bottom:1rem;
     border:1px solid transparent;
     border-radius:.25rem
+    font-style: normal;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ /*   font-size: 16px;*/
 
 }
 .alert-heading{
@@ -601,7 +604,7 @@ margin-top : 100px;
 .alert-success .alert-link{color:#0c4128}
 .alert-info{color:#055160;background-color:#cff4fc;border-color:#b6effb}
 .alert-info .alert-link{color:#04414d}
-.alert-warning{color:#664d03;background-color:#fff3cd;border-color:#ffecb5}
+.alert-warning{color:#000;background-color:#fff3cd;border-color:#ffecb5}
 .alert-warning .alert-link{color:#523e02}
 .alert-danger{color:#842029;background-color:#f8d7da}
 .alert-danger .alert-link{color:#6a1a21}
@@ -628,6 +631,13 @@ fade.show {
   min-width: 800px;
   margin: 0 auto;
 }
+.chart_2{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  min-width: 800px;
+  margin: 0 auto;
+  }
 
 .chart__title {
   width: 100%;
@@ -838,6 +848,7 @@ margin: 0;
     height: 180px;
 }
 
+
 .topic_account{
     text-transform: uppercase;
     font-weight: normal;
@@ -857,18 +868,26 @@ margin: 0;
     margin-left: 30px;
     color: #222120;
 }
-
-.logout {
-    background: #E98074;
+.logout_container{
+background: #E98074;
     border-radius: 30px;
     border-style: none;
-    width: 10%;
-    margin-left: 45%;
+    width: 25%;
     height: 40px;
     align-items: center;
-    position: fixed;
+    max-width:150px;
     text-align: center;
     color: white;
+    font-style: normal;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    line-height: 40px;
+    margin-left: 70%;
+}
+.logout {
+display: block;
+
+    color:white;
     font-style: normal;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
@@ -877,11 +896,10 @@ margin: 0;
 }
 
 
-.logout:hover, .login_btn:hover{
+.logout_container:hover, .login_btn:hover{
     background: #E85A4F;
 }
 
-/* cart empty */
 
 .login_btn {
     background: #E98074;
@@ -899,4 +917,34 @@ margin: 0;
     line-height: 40px;
     text-decoration: none;
     margin-top: 20px;
+}
+th, td{
+font-style: normal;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    text-align: start;
+
+    }
+td{
+font-size: 18px;
+font-weight: 400;
+}
+table{
+width: 50%;
+text-align: start;
+}
+.title_acc {
+font-weight: normal;
+    font-family: "Circle",sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+hr{
+background-color:#D3C9BB;
+color: #D3C9BB;
+border: none;
+height: 1px;
+margin-top: 20px;
 }

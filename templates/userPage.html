@@ -13,14 +13,33 @@
         </div>
     
 
-        <div>
-            <a class="logout" href="/account">LOG OUT</a>
+        <div class ="logout_container">
+            <a class="logout" href="/logout">LOG OUT</a>
         </div>
     </div>
+    <hr>
+{% if user.status %}
+    <h3 class="title_acc">Your orders:</h3>
+    <table>
+        <tr>
 
-  
+            <th>User Lunch</th>
+            <th>Time</th>
+        </tr>
+            {% for el in orders %}
+        <tr>
 
-    <table class ="{{student}}">
+            <td>{{ el.get_lunch_by_id().name}}</td>
+            <td> {{ el.date.strftime("%D %H:%M")}}</td>
+            <td></td>
+        </tr>
+        {% endfor%}
+    </table>
+
+
+
+{% else %}
+       <table>
         <tr>
             <th>User Name</th>
             <th></th>
@@ -31,14 +50,12 @@
         <tr>
             <td>{{ el.get_user_name_by_id() }}</td>
             <td></td>
-            <td>{{ el.get_lunch_by_id().id}}</td>
+            <td>{{ el.get_lunch_by_id().name}}</td>
             <td> {{ el.date.strftime("%H:%M")}}</td>
             <td></td>
         </tr>
         {% endfor%}
     </table>
-
-{% if not user.status %}
     <section class="chart">
         <h1 class="chart__title {{student}}">By likes: </h1>
 
@@ -57,7 +74,7 @@
         <canvas id="canvas" width="830px" height="250px">Браузер не поддерживает Canvas</canvas>
       </div>
     </section>
-    <section>
+    <section class ="chart_2">
         <h1 class="chart__title {{student}}">By orders: </h1>
   <form class="chart__data_2" action="#" method="POST">
         {% for i in range(18) %}

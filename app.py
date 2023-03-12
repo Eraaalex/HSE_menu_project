@@ -19,7 +19,7 @@ app = Flask(__name__)
 app.secret_key = 'secret'
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@db:5432/project_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@db:5432/test"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -108,23 +108,20 @@ def registerPage():
 @login_required
 def accountPage(name):
     name=escape(name)
-    user = db.session.query(Users).filter_by(name =name).first()
+    user = db.session.query(Users).filter_by(name = name).scalar()
     if (user is None):
         return render_template("error404.html")
-    orders_of_day = [] if (user.status) else db.session.query(Orders).filter(func.DATE(Orders.date) == date.today()) # is employee
+    orders_of_day = db.session.query(Orders).filter(func.DATE(Orders.date) == date.today() and func(Orders.user_id) == user.id) if (user.status) else db.session.query(Orders).filter(func.DATE(Orders.date) == date.today()) # is employee
     lunches = [] if (user.status) else sorted(db.session.query(Lunch).all()[:18], key = lambda x: x.id)
 
     # transaction statistics:
     orders_all = [0]*18 # for lunches
     for i in range(18):
-        #orders_all[i] = len(db.session.query(Orders).filter_by(id = i).all())
         orders_all[i] = random.randint(0, 100)
-    print(orders_all)
 
 
     return render_template('userPage.html', user = user, addition= "/cart", registered = "/"+current_user.name,
-                           orders = orders_of_day, lunches = lunches, orders_all = orders_all,
-                           student = "invisible" if (current_user.status) else "")
+                           orders = orders_of_day, lunches = lunches, orders_all = orders_all)
 
 @login_manager.user_loader
 def load_user(userid):
@@ -172,12 +169,10 @@ flag = True
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        if (flag):
-            flag = False
-            basic_input()
+        basic_input()
         print("OK")
 
-    app.run(debug=True, host ='0.0.0.0')
+    app.run(debug=True)
 
 
 
