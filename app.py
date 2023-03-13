@@ -19,7 +19,7 @@ app = Flask(__name__)
 app.secret_key = 'secret'
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@localhost:5432/project_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:eralex@db:5432/project_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
