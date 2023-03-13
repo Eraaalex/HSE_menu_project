@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: eralex
       POSTGRES_DB: project_db
   app:
-    image: app
+    image: eralex/app
     build: .
     ports:
       - "5000:5000"
