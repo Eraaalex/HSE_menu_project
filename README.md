@@ -1,5 +1,5 @@
 # Menu Hse
 
-Веб-приложение для оптимизации работы столовой посредством возможности онлайн-заказов. 
+A web application for optimizing the operation of the dining room through the possibility of online orders.
 
-
+Technology stack: Python, SQLAlchemy, PostgrSQL, Docker (a bit)
